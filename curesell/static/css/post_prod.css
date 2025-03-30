@@ -1,0 +1,292 @@
+.product-post,
+.product-post * {
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+  position: relative;
+  overflow: auto; /* Allow scrolling if content overflows */
+}
+
+.nav-header {
+  background: #f5c426;
+  padding: 8px 24px; /* Reduced padding for less blank space */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px; /* Reduced height of the header */
+  position: fixed; /* Keep the header fixed at the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure the header stays above other content */
+}
+
+.logo-with-name {
+  flex-shrink: 0;
+  width: 291px;
+  height: 60px;
+  position: static;
+}
+.logo {
+  border-radius: 24px;
+  width: 40px; /* Adjusted width for smaller logo */
+  height: 40px; /* Adjusted height for smaller logo */
+  position: absolute;
+  left: 16px; /* Adjusted left position */
+  top: 10px; /* Adjusted top position to align with reduced height */
+  object-fit: cover;
+  aspect-ratio: 50/45; /* Maintain the aspect ratio */
+}
+.cu-resell {
+  color: #622b8c;
+  text-align: left;
+  font-family: "Newsreader-Medium", sans-serif;
+  font-size: 24px; /* Reduced font size for the logo text */
+  line-height: 100%;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  position: absolute;
+  left: 70px; /* Adjusted left position to align with smaller logo */
+  top: 15px; /* Adjusted top position to align with reduced height */
+  width: 216px;
+}
+.nav-menu {
+  display: flex; /* Use Flexbox for layout */
+  flex-direction: row; /* Align items horizontally */
+  gap: 12px; /* Adjust spacing between menu items */
+  align-items: center; /* Vertically center items */
+  justify-content: flex-start; /* Align items to the left */
+}
+
+/* Shared style for all menu items */
+.nav-menu-item {
+  color: #000000;
+  text-align: center;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 14px; /* Reduced font size for menu items */
+  line-height: 130%;
+  font-weight: 400;
+  padding: 6px; /* Adjust padding for smaller text */
+  text-decoration: none; /* Remove underline from links */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for menu items */
+.nav-menu-item:hover {
+  background-color: #f5c426; /* Highlight background on hover */
+  color: #ffffff; /* Change text color on hover */
+}
+
+/* Cart button styling */
+.cart-button {
+  background: #622b8c;
+  border-radius: 8px;
+  padding: 10px 20px; /* Add padding for the button */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.2);
+  position: relative; /* Required for hover illustration */
+  overflow: hidden; /* Ensure the hover effect stays within the button */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+}
+
+.nav-cart-text {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter-SemiBold", sans-serif;
+  font-size: 16px; /* Reduced font size for cart button text */
+  line-height: 100%;
+  font-weight: 600;
+  text-decoration: none; /* Remove underline from the link */
+  white-space: nowrap; /* Prevent text wrapping */
+  z-index: 1; /* Ensure text stays above the hover effect */
+}
+
+/* Hover effect for the cart button */
+.cart-button:hover {
+  background-color: #7a3db8; /* Slightly lighter purple on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Hover illustration: Add a radial gradient effect */
+.cart-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3); /* Light radial gradient */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: 0; /* Ensure it stays behind the text */
+}
+
+.cart-button:hover::before {
+  width: 200%; /* Expand the radial gradient */
+  height: 200%; /* Expand the radial gradient */
+}
+
+/**************************************************************************************/
+/*below are the css for the form body*/
+
+.form-container {
+  max-width: 1000px; /* Restrict the width of the form */
+  margin: 80px auto; /* Add a top margin to account for the height of the navigation bar */
+  padding: 20px; /* Add some padding */
+  background-color: #f9f9f9; /* Optional: Add a background color */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+}
+
+.post_form_title {
+  text-align: center; /* Center the text horizontally */
+  font-size: 32px; /* Increase the font size */
+  font-family: "Inter-Bold", sans-serif; /* Use a bold font */
+  font-weight: 700; /* Ensure the font is bold */
+  margin-bottom: 20px; /* Add spacing below the header */
+  color: #333; /* Optional: Set a dark color for the text */
+}
+
+.input_bar,
+.input_bar_long {
+  margin: 10px 0px;
+  margin-bottom: 30px;
+}
+
+.image_upload_bar {
+  margin: 10px 0px;
+  font-size: 16px; /* Match the font size of placeholders */
+  font-family: Arial, sans-serif; /* Match the font family of placeholders */
+  color: #888; 
+  width: 100%;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: #a259ff26;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  margin-bottom: 30px;
+}
+
+/* Shared styles for input and textarea */
+.input_bar input,
+.input_bar_long textarea {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  /* Rounded corners */
+  background-color: #a259ff26;
+  /* Same background color */
+}
+
+/* Focus styles for both input and textarea */
+.input_bar input:focus,
+.input_bar_long textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* Add a focus shadow */
+}
+
+/* Specific styles for input_bar input */
+.input_bar input {
+  height: 40px;
+  /* Fixed height for single-line input */
+}
+
+/* Specific styles for input_bar_long textarea */
+.input_bar_long textarea {
+  height: 200px;
+  /* Default height for multi-line input */
+  resize: vertical;
+  /* Allow resizing for textarea */
+}
+
+.field-title {
+  display: block;
+  /* Ensures the label is on its own line */
+  margin-top: 20px;
+  margin-left: 20px;
+  /* Adds indentation (like a tab) */
+  margin-bottom: 0px;
+  font-size: 16px;
+  /* Adjust font size as needed */
+  font-weight: bold;
+  /* Optional: Make the label bold */
+  color: #000;
+  /* Optional: Set the label color */
+}
+
+.prod_post-btn {
+  width: 100%;
+  height: 60px;
+
+  background-color: #fdd85f;
+  border-radius: 36px;
+  box-shadow: 2px 3px 4px #00000040;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+
+/* Focus styles for the custom upload box */
+.image_upload_bar .custom-upload-box:hover {
+  background-color: #d3b3ff26;
+}
+
+/* Image preview styling */
+.image-preview {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom upload box styling */
+.custom-upload-box {
+  font-size: 16px; /* Match the font size of placeholders */
+  font-family: Arial, sans-serif; /* Match the font family of placeholders */
+  color: #888; /* Match the placeholder text color */
+  height: 30px; /* Increase the height to make the hover area larger */
+  border: none;
+  padding: 0; /* Remove extra padding */
+  border-radius: 12px;
+  background-color: #a259ff26;
+  display: flex; /* Use Flexbox for centering */
+  align-items: center; /* Vertically center the text */
+  justify-content: center; /* Horizontally center the text */
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  margin: 0 ; /* Center the box horizontally within the parent */
+}
+
+.custom-upload-box:hover {
+  background-color: #d3b3ff26; /* Slightly darker background on hover */
+}
+
+.error_tip {
+  display: none; /* Hide error messages by default */
+  color: #e93333; /* Red color for errors */
+  font-size: 14px;
+  margin-top: 8px; /* Add spacing above the error message */
+  margin-left: 20px; /* Indent to align with the field description */
+  font-family: Arial, sans-serif;
+}
