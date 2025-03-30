@@ -6,85 +6,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/global.css" />
   <link rel="stylesheet" href="/static/css/post_prod.css">
+  <link rel="stylesheet" href="/static/css/nav_bar.css">
 
   <title>Post Product</title>
 </head>
 
 <body>
-  <!-- navigation header -->
-  <div class="nav-header">
-
-    <!-- the logo with text on top left -->
-    <a href="/home_page" class="logo-link">
-      <div class="logo-with-name">
-        <img class="logo" src="/static/img/logo_rounded.png" />
-        <div class="cu-resell">CUResell</div>
-      </div>
-    </a>
-
-    <!-- the menu on the top right -->
-    <div class="nav-menu">
-      <a href="/search" class="nav-menu-item">Search</a>
-      <a href="/templates/ProductPost.html" class="nav-menu-item">Post</a>
-      <a href="/chats" class="nav-menu-item">Chats</a>
-      <a href="/templates/profile.html" class="nav-menu-item">Profile</a>
-      <a href="/templates/homepage.html" class="nav-menu-item">Login/Register</a>
-      <div class="cart-button">
-        <a href="/cart" class="nav-cart-text">Cart(3)</a>
-      </div>
-    </div>
-  </div>
+  <!-- Include the navigation bar -->
+  <div id="nav-bar"></div>
+  <script>
+    fetch('/templates/nav_bar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-bar').innerHTML = data;
+        });
+  </script>
 
   <!-- post form -->
-      <!-- Wrap the form in a container -->
-      <div class="form-container">
+  <div class="form-container">
+    <!-- form title -->
+    <div class="post_form_title">Post a Product for Sell!</div>
 
-        <!-- form title -->
-        <div class="post_form_title">Post a Product for Sell!</div>
-
-        <form id="prod_post_form" action="/user/prod_post_handle/" method="post" onsubmit="return validateForm()">
-          <!-- Title Input -->
-          <label for="prod_title" class="field-title">1. Title</label>
-          <div class="input_bar">
-            <input type="text" name="prod_title" placeholder="Title of the product" id="prod_title">
-            <span class="error_tip" id="prod_title_error">This field is required.</span>
-          </div>
-
-          <!-- Image Input -->
-          <label for="prod_image" class="field-title">2. Image</label>
-          <div class="image_upload_bar">
-            <div id="image-preview" class="image-preview"></div>
-            <input type="file" name="prod_image" id="prod_image" accept="image/*" onchange="previewImage(event)" hidden>
-            <div class="custom-upload-box" onclick="document.getElementById('prod_image').click();">
-              Click to Upload Image
-            </div>
-            <span class="error_tip" id="prod_image_error">Please upload an image.</span>
-
-          </div>
-
-
-          <!-- Price Input -->
-          <label for="prod_price" class="field-title">3. Price (in HKD)</label>
-          <div class="input_bar">
-            <input type="text" name="prod_price" placeholder="Enter Price of Product" id="prod_price">
-            <span class="error_tip" id="prod_price_error">Please enter a valid positive number.</span>
-          </div>
-
-          <!-- Description Input -->
-          <label for="description" class="field-title">4. Description</label>
-          <div class="input_bar_long">
-            <textarea name="description" placeholder="Enter a short description of product" id="description"></textarea>
-            <span class="error_tip" id="description_error">This field is required.</span>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="upload-button">
-            <input type="submit" class="prod_post-btn" id="prod_post_btn" value="Post Product!">
-          </div>
-        </form>
+    <form id="prod_post_form" action="/user/prod_post_handle/" method="post" onsubmit="return validateForm()">
+      <!-- Title Input -->
+      <label for="prod_title" class="field-title">1. Title</label>
+      <div class="input_bar">
+        <input type="text" name="prod_title" placeholder="Title of the product" id="prod_title">
+        <span class="error_tip" id="prod_title_error">This field is required.</span>
       </div>
-    
-    </div>
+
+      <!-- Image Input -->
+      <label for="prod_image" class="field-title">2. Image</label>
+      <div class="image_upload_bar">
+        <div id="image-preview" class="image-preview"></div>
+        <input type="file" name="prod_image" id="prod_image" accept="image/*" onchange="previewImage(event)" hidden>
+        <div class="custom-upload-box" onclick="document.getElementById('prod_image').click();">
+          Click to Upload Image
+        </div>
+        <span class="error_tip" id="prod_image_error">Please upload an image.</span>
+      </div>
+
+      <!-- Price Input -->
+      <label for="prod_price" class="field-title">3. Price (in HKD)</label>
+      <div class="input_bar">
+        <input type="text" name="prod_price" placeholder="Enter Price of Product" id="prod_price">
+        <span class="error_tip" id="prod_price_error">Please enter a valid positive number.</span>
+      </div>
+
+      <!-- Description Input -->
+      <label for="description" class="field-title">4. Description</label>
+      <div class="input_bar_long">
+        <textarea name="description" placeholder="Enter a short description of product" id="description"></textarea>
+        <span class="error_tip" id="description_error">This field is required.</span>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="upload-button">
+        <input type="submit" class="prod_post-btn" id="prod_post_btn" value="Post Product!">
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
