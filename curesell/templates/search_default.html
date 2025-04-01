@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/search_def.css">
+  <link rel="stylesheet" href="/static/css/nav_bar.css">
+  
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+
+  <title>Search</title>
+  
+</head>
+
+<body>
+  <!-- Include the navigation bar -->
+  <div id="nav-bar"></div>
+  <script>
+    fetch('/templates/nav_bar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-bar').innerHTML = data;
+        });
+  </script>
+
+    <!-- search default -->
+    <div class="search-default">
+        <!-- search bar-->
+        <form action="/after_search" method="GET" class="search-form">
+            <input type="text" name="query" placeholder="Search" class="search-input" onkeypress="if(event.key === 'Enter') { this.form.submit(); }" />
+        </form>
+
+    <!-- default button-->
+    <a href="/default" class="default-chip">
+        <div class="default">Default</div>
+    </a>
+
+    <!-- sort and filter button -->
+    <div class="sort-filter-chip">
+        <button class="sort-filter-button">Sort & Filter</button>
+        <select name="sort" multiple class="sort-filter-select">
+            <option value="price_high_to_low">price: high-low</option>
+            <option value="price_low_to_high">price: low-high</option>
+            <option value="date_early_to_late">date: early-late</option>
+            <option value="date_late_to_early">date: late-early</option>
+        </select>
+    </div>
+
+    <!-- product cards -->
+    <div id="product-cards">
+        <!-- insert by js -->
+    </div>
+  </div>
+  
+</body>
+
+</html>
+
+<script src="/static/js/search_product_display.js"></script>
