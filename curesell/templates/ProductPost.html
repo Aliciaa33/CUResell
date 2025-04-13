@@ -13,14 +13,15 @@
 
 <body>
   <!-- Include the navigation bar -->
-  <div id="nav-bar"></div>
+  {% include 'nav_bar.html' %}
+  <!-- <div id="nav-bar"></div>
   <script>
     fetch('/templates/nav_bar.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('nav-bar').innerHTML = data;
         });
-  </script>
+  </script> -->
 
   <!-- post form -->
   <div class="form-container">
