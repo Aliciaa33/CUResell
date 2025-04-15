@@ -12,75 +12,44 @@
     <div class="logo"><img src="/static/img/logo.jpg" height="150px"></div>
     <div class="welcom">Welcom to CURESELL!</div>
 
-    <!-- register form starts-->
+    <!-- register form -->
     <div class="reg_box">
         <form id="reg_form" action="/user/register_handle/" method="post">
-            <!-- Django template tag for CSRF protection -->
-            {% csrf_token %}
             <button type="button" class="close-btn" onclick="goToHomepage()"><i class='bx bx-x'></i></button>
             <p class="title">Register</p>
         
             <!-- input of username -->
             <div class="info">
                 <i class='bx bx-user'></i>
-                <input type="text" name="username" id="username"
-                        placeholder="Create an unique account ID"
-                        value="{{ preserved_username|default:'' }}">
+                <input type="text" name="username" placeholder="Create an unique account ID" id="username">
                 <span class="error_tip">prompt message</span>
-                {% if errors.username %}<span class="error_tip">{{ errors.username }}</span>{% endif %}
             </div>
         
             <!-- input of password -->
             <div class="info">
                 <i class='bx bx-lock-alt'></i>
-                <input type="password" name="password" id="password"
-                placeholder="Set password"/>
+                <input type="password" name="password" placeholder="Set password" id="password">
                 <span class="error_tip">prompt message</span>
-                {% if errors.password %}<span class="error_tip">{{ errors.password }}</span>{% endif %}
             </div>
         
             <!-- input of confirming password -->
             <div class="info">
                 <i class='bx bx-lock-alt'></i>
-                <input type="password" name="password2" id="password2"
-                placeholder="Confirm password"/>
+                <input type="password" name="password2" placeholder="Confirm password" id="password2" />
                 <span class="error_tip">prompt message</span>
-                {% if errors.confirm_password %}<span class="error_tip">{{ errors.confirm_password }}</span>{% endif %}
             </div>
         
             <input type="submit" class="reg-btn" id="register_btn" value="Register">
         </form>
     </div>
-    <!-- register form ends -->
 
-    <!-- back to homepage starts-->
+    <!-- go back to homepage -->
     <script>
         function goToHomepage() {
                 // Redirect to the homepage
-                window.location.href = "{% url 'homepage' %}"; // Change this to your homepage URL
-        }
-        
-        document.addEventListener('DOMContentLoaded', function () {
-                const errors = {
-                    username: "{{ errors.username|default:'' }}",
-                    password: "{{ errors.password|default:'' }}",
-                    confirm_password: "{{ errors.confirm_password|default:'' }}"
-                };
-
-                let alertMessage = '';
-                for (const [key, message] of Object.entries(errors)) {
-                    if (message) {
-                        alertMessage += message + '\n';
-                    }
-                }
-
-                if (alertMessage) {
-                    alert(alertMessage);
-                }
+                window.location.href = 'homepage.html'; // Change this to your homepage URL
             }
-        );
     </script>
-    <!-- back to homepage ends-->
 <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/register.js"></script>
