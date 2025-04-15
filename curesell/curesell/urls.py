@@ -18,12 +18,12 @@ Including another URLconf
 2. products: all pages related to product: search, post
 3. transaction: all pages related to transaction
 """
-from django.contrib import admin
-from django.urls import path
+# from django.contrib import admin
+# from django.urls import path
 from django.conf.urls import url,include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     url(r'^',include('product.urls')),
     url(r'^',include('user.urls')),
 ]

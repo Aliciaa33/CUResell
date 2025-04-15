@@ -19,9 +19,9 @@ $(function(){
 
 	function check_user_name(){
 		var len = $('#username').val().length;
-		if(len<3||len>20)
+		if(len<2||len>20)
 		{
-			$('#username').next().html("Username must be 3-20 characters long")
+			$('#username').next().html("Username must be 2 to 20 characters long")
 			$('#username').next().show();
 			error_name = true;
 		}
@@ -36,7 +36,7 @@ $(function(){
 		var len = $('#password').val().length;
 		if(len<6||len>20)
 		{
-			$('#password').next().html("Password must be 6-20 characters long")
+			$('#password').next().html("Password must be 6 to 20 characters long")
 			$('#password').next().show();
 			error_password = true;
 		}

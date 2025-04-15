@@ -3,8 +3,15 @@ from . import views
 
 urlpatterns = [
     # url(r'^$', views.welcome),
-    url(r'^$', views.homepage),
-    url(r'^login/$',views.login),
-    url(r'^register/$',views.register),
-    url(r'^verification/$',views.verification),
+    url(r'^$', views.homepage, name='homepage'),
+    url(r'^login/$',views.login, name='login'),
+    url(r'^login_handle/$',views.login_handle),
+    url(r'^register/$',views.register, name='register'),
+    url(r'^register_handle/$',views.register_handle),
+    url(r'^skip_verify/$',views.skip_verify, name='skip_verify'),
+    url(r'^verification/$',views.verification, name='verification'),
+    url(r'^verification_handle/$',views.verification_handle),
+    url(r'^send_code/$',views.send_code),
+    url(r'^send_code_handle/$',views.send_code_handle),
+    url(r'^search/$',views.search),
 ]

@@ -1,18 +1,37 @@
-document.getElementById('skip_verification').onclick = function() {
-            window.location.href = 'homepage.html';
-        };
+$(function(){
+    
+	var error_email = true;
 
-        document.getElementById('send_code').onclick = function() {
-            const email = document.getElementById('email').value;
-            // Send a request to the server to send the verification code
-            fetch('/send_verification_code/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email }),
-            }).then(response => {
-                // Handle response, e.g., show a success message
-                alert('Verification code sent to ' + email);
-            });
-        };
+	$('#email').blur(function() {
+		check_email();
+	});
+
+	function check_email(){
+		var email = $('#email').val();
+		if(email.endsWith('@link.cuhk.edu.hk'))
+		{
+            $('#email').next().hide();
+			error_email = false;
+		}
+		else
+		{
+			$('#email').next().html("Email should end with @link.cuhk.edu.hk")
+			$('#email').next().show();
+			error_email = true;
+		}
+	}
+
+	$('#verify_form').submit(function() {
+		check_email();
+	
+		if(error_email)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+
+	});
+})

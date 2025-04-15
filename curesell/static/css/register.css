@@ -16,7 +16,7 @@ div {
     text-align: center;
 }
 
-.logo img{
+.logo img {
     margin: 50px 0px 10px;
     border-radius: 30px;
 }
@@ -81,7 +81,7 @@ div {
 }
 
 .info input:focus {
-    color:gray;
+    color: gray;
 }
 
 .reg-btn {
@@ -105,6 +105,16 @@ div {
     display: none;
     height: 10px;
     line-height: 10px;
-    margin: auto 0;
+    margin: 10px 0;
     color: #e93333;
+    font-weight: 700;
+}
+
+.login_error {
+    height: 10px;
+    line-height: 10px;
+    text-align: center;
+    margin: 20px 0;
+    color: #e93333;
+    font-weight: 700;
 }

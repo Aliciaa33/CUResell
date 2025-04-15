@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'curesell.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -132,3 +132,10 @@ MEDIA_ROOT=BASE_DIR / "static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 587  # or 465 for SSL
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '1879988594@qq.com'
+EMAIL_HOST_PASSWORD = 'mvfobslfixbsbhee'
