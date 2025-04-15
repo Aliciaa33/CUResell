@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CUResell</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel = "stylesheet" href="/static/css/login.css">
+    <link rel = "stylesheet" href="/static/css/register.css">
 </head>
 <html>
 <body>
@@ -14,23 +14,28 @@
 
     <!-- Login form -->
     <div class="reg_box">
-        <form id="reg_form" action="/user/register_handle/" method="post">
+        <form id="reg_form" action="/user/login_handle/" method="post">
+            <!-- Django template tag for CSRF protection -->
+            {% csrf_token %}
             <button type="button" class="close-btn" onclick="goToHomepage()"><i class='bx bx-x'></i></button>
             <p class="title">Login</p>
         
             <!-- input of username -->
             <div class="info">
                 <i class='bx bx-user'></i>
-                <input type="text" name="username" placeholder="Type in your username" id="username">
-                <span class="error_tip">prompt message</span>
+                <input type="text" name="username" placeholder="Enter your username" id="username" value="{{ username }}">
             </div>
-        
+
             <!-- input of password -->
             <div class="info">
                 <i class='bx bx-lock-alt'></i>
-                <input type="password" name="password" placeholder="Input password" id="password">
-                <span class="error_tip">prompt message</span>
+                <input type="password" name="password" placeholder="Input password" id="password" value="{{ password }}">
             </div>
+
+            <!-- Conditional check if there's an error message to display -->
+            {% if error_msg != '' %}
+            <div class="login_error">{{ error_msg }}</div>
+            {% endif %}
         
             <input type="submit" class="reg-btn" id="reg_btn" value="Login">
         </form>
@@ -40,12 +45,11 @@
     <script>
         function goToHomepage() {
                 // Redirect to the homepage
-                window.location.href = 'homepage.html'; // Change this to your homepage URL
-            }
+                window.location.href = "{% url 'homepage' %}"; 
+        }
     </script>
 <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/login.js"></script>
 <script src="/static/js/file.js"></script>
 </body>
 </html>
