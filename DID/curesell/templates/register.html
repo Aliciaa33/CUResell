@@ -12,32 +12,34 @@
     <div class="logo"><img src="/static/img/logo.jpg" height="150px"></div>
     <div class="welcom">Welcom to CURESELL!</div>
 
-    <!-- Login form -->
+    <!-- register form -->
     <div class="reg_box">
-        <form id="reg_form" action="/user/login_handle/" method="post">
-            <!-- Django template tag for CSRF protection -->
-            {% csrf_token %}
+        <form id="reg_form" action="/user/register_handle/" method="post">
             <button type="button" class="close-btn" onclick="goToHomepage()"><i class='bx bx-x'></i></button>
-            <p class="title">Login</p>
+            <p class="title">Register</p>
         
             <!-- input of username -->
             <div class="info">
                 <i class='bx bx-user'></i>
-                <input type="text" name="username" placeholder="Enter your username" id="username" value="{{ username }}">
+                <input type="text" name="username" placeholder="Create an unique account ID" id="username">
+                <span class="error_tip">prompt message</span>
             </div>
-
+        
             <!-- input of password -->
             <div class="info">
                 <i class='bx bx-lock-alt'></i>
-                <input type="password" name="password" placeholder="Input password" id="password" value="{{ password }}">
+                <input type="password" name="password" placeholder="Set password" id="password">
+                <span class="error_tip">prompt message</span>
             </div>
-
-            <!-- Conditional check if there's an error message to display -->
-            {% if error_msg != '' %}
-            <div class="login_error">{{ error_msg }}</div>
-            {% endif %}
         
-            <input type="submit" class="reg-btn" id="reg_btn" value="Login">
+            <!-- input of confirming password -->
+            <div class="info">
+                <i class='bx bx-lock-alt'></i>
+                <input type="password" name="password2" placeholder="Confirm password" id="password2" />
+                <span class="error_tip">prompt message</span>
+            </div>
+        
+            <input type="submit" class="reg-btn" id="register_btn" value="Register">
         </form>
     </div>
 
@@ -45,11 +47,12 @@
     <script>
         function goToHomepage() {
                 // Redirect to the homepage
-                window.location.href = "{% url 'homepage' %}"; 
-        }
+                window.location.href = 'homepage.html'; // Change this to your homepage URL
+            }
     </script>
 <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/register.js"></script>
 <script src="/static/js/file.js"></script>
 </body>
 </html>
