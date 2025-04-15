@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUResell</title>
+    <link rel="stylesheet" href="/static/css/register.css">
+    <style>
+        .code-info{
+            position: relative;
+        }
+
+        .code-info button{
+            position: absolute;
+            right: 10px; /* Adjust position as needed */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust for vertical centering */
+            background: none;
+            border: none; /* Remove default border */
+            cursor: pointer; /* Change cursor to pointer */
+            font-size: 14px;
+            font-weight: 700;
+            color: #120f0f;
+        }
+
+        .code-info button:hover{
+            color: #4f1775;
+            text-decoration: underline;
+        }
+
+        .verify-btn {
+            margin-bottom: 20px;
+            background-color: #FCF28F;
+            color: #626161;
+        }
+
+        .verify-btn:hover{
+            background-color: #f5e76d;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo"><img src="/static/img/logo.jpg" height="150px"></div>
+    <div class="welcom">Welcom to CURESELL!</div>
+    <div class="reg_box">
+        <form id="verify_form" action="/user/verification_handle/" method="post">
+            <p class="title">Email Verification</p>
+    
+            <!-- input of email -->
+            <div class="info">
+                <input type="email" name="email" id="email" placeholder="yourname@link.cuhk.edu.hk">
+                <span class="error_tip">prompt message</span>
+            </div>
+    
+            <!-- input of verification code -->
+            <div class="info code-info">
+                <i class='bx bx-lock-alt'></i>
+                <input type="text" name="code" id="code" placeholder="Verification Code">
+                <button type="button" id="send_code">Send Code</button>
+                <span class="error_tip">prompt message</span>
+            </div>
+            <input type="submit" class="reg-btn verify-btn" id="verify_btn" value="Verify">
+        </form>
+
+        <button class="reg-btn" id="skip_verification">Skip</button>
+    </div>
+    <script src="/static/js/verification.js"></script>
+</body>
+</html>
