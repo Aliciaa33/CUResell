@@ -1,31 +1,79 @@
-// attempt to fetch product data from the server
-fetch('/products')
-.then(response => response.json())
-.then(data => {
-    const productCardsContainer = document.getElementById('product-cards');
-    // Sort products by date in descending order by default
-    data.sort((a, b) => new Date(b.date) - new Date(a.date));
-    data.forEach(product => {
-        const productCard = document.createElement('a');
-        productCard.href = `/product/${product.id}`;
-        productCard.className = 'product-card';
+document.addEventListener('DOMContentLoaded', function() {
+    // sort
+    const sortBtn = document.querySelector('.sort-btn');
+    const sortOptions = document.querySelector('.sort-options');
+    const applyBtn = document.querySelector('.apply-btn');
 
-        const productName = document.createElement('div');
-        productName.className = 'product-name';
-        productName.textContent = product.name;
+    // display/hide sort options
+    sortBtn.addEventListener('click', () => {
+        sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
+    });
 
-        const productPrice = document.createElement('div');
-        productPrice.className = 'product-price';
-        productPrice.textContent = `$${product.price} / lb`;
+    // apply sort
+    applyBtn.addEventListener('click', () => {
+        const selectedSorts = Array.from(document.querySelectorAll('.sort-options input:checked'))
+                                 .map(input => input.value);
+        // 这里应调用后端API进行排序，示例使用前端排序
+        sortProducts(selectedSorts);
+        sortOptions.style.display = 'none';
+    });
 
-        const productImage = document.createElement('img');
-        productImage.className = 'product-image';
-        productImage.src = product.image;
-
-        productCard.appendChild(productName);
-        productCard.appendChild(productPrice);
-        productCard.appendChild(productImage);
-
-        productCardsContainer.appendChild(productCard);
+    // 商品点击跳转
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', () => {
+            window.location.href = `/product/${card.dataset.id}`; // 需根据实际路由修改
+        });
     });
 });
+
+$(document).ready(function() {
+    // 显示排序选项
+    $('.sort-btn').click(function() {
+      $('.sort-options').toggle();
+    });
+
+    // 应用排序选项
+    $('.apply-btn').click(function() {
+      var selectedOptions = [];
+      $('.sort-options input:checked').each(function() {
+        selectedOptions.push($(this).val());
+      });
+      // 这里可以将 selectedOptions 发送到后端进行排序处理
+      console.log('Selected sorting options:', selectedOptions);
+      $('.sort-options').hide();
+    });
+  });
+  
+$(document).ready(function() {
+    // 假设后端返回的搜索结果是一个包含商品信息的数组
+    var searchResults = [
+      {
+        name: 'Heirloom tomato',
+        price: '$5.99 / lb',
+        image: '/static/img/logo.jpg'
+      },
+      {
+        name: 'Organic ginger',
+        price: '$12.99 / lb',
+        image: '/static/img/logo.jpg'
+      }
+    ];
+  
+    // 动态生成商品卡片
+    var productGrid = $('#product-grid');
+    searchResults.forEach(function(product) {
+      var productCard = `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <h3 class="product-title">${product.name}</h3>
+          <p class="product-price">${product.price}</p>
+        </div>
+      `;
+      productGrid.append(productCard);
+    });
+  });
+
+function sortProducts(sorts) {
+    // 实现具体排序逻辑（需与后端配合）
+    console.log('Applying sorts:', sorts);
+}

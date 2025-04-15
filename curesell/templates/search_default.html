@@ -6,36 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/search_def.css">
   <link rel="stylesheet" href="/static/css/nav_bar.css">
-  
-  <style>
-   a,
-   button,
-   input,
-   select,
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   * {
-       box-sizing: border-box;
-       margin: 0;
-       padding: 0;
-       border: none;
-       text-decoration: none;
-       background: none;
-   
-       -webkit-font-smoothing: antialiased;
-   }
-   
-   menu, ol, ul {
-       list-style-type: none;
-       margin: 0;
-       padding: 0;
-   }
-   </style>
-
-  <title>Search</title>
+  <title>CUResell—Search</title>
   
 </head>
 
@@ -51,37 +22,44 @@
         });
   </script> -->
 
-    <!-- search default -->
-    <div class="search-default">
-        <!-- search bar-->
-        <form action="/after_search" method="GET" class="search-form">
-            <input type="text" name="query" placeholder="Search" class="search-input" onkeypress="if(event.key === 'Enter') { this.form.submit(); }" />
+  <div class="search-container">
+    <div class="search-controls">
+        <form class="search-form" action="/after_search" method="GET">
+            <input type="text" name="query" placeholder="Search..." class="search-input">
+            <button type="submit" class="search-button">Search</button>
         </form>
-
-    <!-- default button-->
-    <a href="/default" class="default-chip">
-        <div class="default">Default</div>
-    </a>
-
-    <!-- sort and filter button -->
-    <div class="sort-filter-chip">
-        <button class="sort-filter-button">Sort & Filter</button>
-        <select name="sort" multiple class="sort-filter-select">
-            <option value="price_high_to_low">price: high-low</option>
-            <option value="price_low_to_high">price: low-high</option>
-            <option value="date_early_to_late">date: early-late</option>
-            <option value="date_late_to_early">date: late-early</option>
-        </select>
+        
+        <div class="filter-buttons">
+            <button class="default-btn">Default</button>
+            
+            <div class="sort-dropdown">
+                <button class="sort-btn">Sort ▾</button>
+                <div class="sort-options">
+                    <label><input type="checkbox" value="rating_high_low"> Seller Rating (High to Low)</label>
+                    <label><input type="checkbox" value="rating_low_high"> Seller Rating (Low to High)</label>
+                    <label><input type="checkbox" value="price_high_low"> Price (High to Low)</label>
+                    <label><input type="checkbox" value="price_low_high"> Price (Low to High)</label>
+                    <label><input type="checkbox" value="date_old_new"> Post Date (Oldest First)</label>
+                    <label><input type="checkbox" value="date_new_old"> Post Date (Newest First)</label>
+                    <button class="apply-btn">Apply</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- product cards -->
-    <div id="product-cards">
-        <!-- insert by js -->
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <img src="/static/img/logo.jpg" alt="{{ product.name }}" class="product-image">
+            <h3 class="product-title">{{ product.name }}</h3>
+            <p class="product-price">${{ product.price }}</p>
+        </div>
+        {% endfor %}
     </div>
-  </div>
-  
-</body>
-
-</html>
+</div>
 
 <script src="/static/js/search_product_display.js"></script>
+  
+</body>
+</html>
