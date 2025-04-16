@@ -52,7 +52,7 @@ def register_handle(request):
     username = post.get('username')
     password = post.get('password')
     password2 = post.get('password2')
-
+    contact_link = post.get('contact_link')
     errors = {}
     if UserInfo.objects.filter(username=username).exists():
         errors['username'] = "- Username already existed"
@@ -62,17 +62,21 @@ def register_handle(request):
             'error': errors,
             'username': username,
             'password': password,
-            'password2': password2
+            'password2': password2,
+            'contact_link': contact_link
         }
         return render(request, 'register.html', context)
     
     # update database if valid
+    print(contact_link)
     s1 = sha1()
     s1.update(password.encode('utf8'))
     upwd3 = s1.hexdigest()
     user = UserInfo()
     user.username = username
     user.password = upwd3
+    user.rate= 3.0
+    user.contact_link = contact_link
     user.save()
     # return redirect('/login')
     # return redirect('/verification')
@@ -120,3 +124,18 @@ def verification_handle(request):
     
     context = {'title': 'Verify', 'error_msg': 'Wrong Code'}
     return render(request, 'verify.html', context)
+
+def profile(request):
+    username = request.session.get('username')
+
+    userinfo = UserInfo.objects.filter(username=username).first()
+
+
+    contact_link = userinfo.contact_link
+    rate = userinfo.rate
+    if username == None:
+        context = { 'error_msg': 'please login first'}
+        return render(request, 'profile.html', context)
+    else:
+        context = {'username': username, 'contact_link': contact_link, 'rate1': rate, 'rate2': int(rate*100)}
+        return render(request, 'profile.html', context)

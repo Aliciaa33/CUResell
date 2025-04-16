@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^send_code/$',views.send_code),
     url(r'^send_code_handle/$',views.send_code_handle),
     url(r'^search/$',views.search),
+    url(r'^profile/$',views.profile, name='profile'),
 ]
