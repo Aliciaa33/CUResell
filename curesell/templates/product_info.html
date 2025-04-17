@@ -28,11 +28,18 @@
       <!-- item_info_title -->
       <div class="item_info_title">Item Name</div>
 
+      <!-- Price -->
+      <div class="item_price">$ 99.99</div>
+        
+      <div class="seller-info">
+          <i class="fas fa-user-circle seller-icon"></i>
+          <span class="seller-name">Username</span>
+      </div>
 
+      <div class="seller-rating"> <span id="seller-rating-stars"></span></div>
 
       <!-- Description -->
       <label class="description">Here is the short description of the Item, and there will be many words in here, it might be 1000 words in english so that it could gives clear description</label>
-
 
       <div class="image-container">
          <img src="/static/img/logo_rounded.png" alt="the testing logo">
@@ -45,28 +52,62 @@
       <div class="button-container">
          <button class="button">Adding to shopping cart</button>
          <button class="button">Make payment</button>
-     </div>
+      </div>
+
+      <div class="button-container">
+         <button class="button_chat">Chat with Seller</button>
+         <button class="button_buy">Buy It Now</button>
+      </div>
    </div>
 </body>
 
 </html>
 
 <script>
- function previewImage(event) {
-   const file = event.target.files[0];
-   const previewContainer = document.getElementById('image-preview');
-   previewContainer.innerHTML = ''; // Clear any existing preview
+   function previewImage(event) {
+       const file = event.target.files[0];
+       const previewContainer = document.getElementById('image-preview');
+       previewContainer.innerHTML = ''; // Clear any existing preview
 
-   if (file) {
-     const reader = new FileReader();
-     reader.onload = function (e) {
-       const img = document.createElement('img');
-       img.src = e.target.result;
-       previewContainer.appendChild(img);
-     };
-     reader.readAsDataURL(file);
+       if (file) {
+           const reader = new FileReader();
+           reader.onload = function (e) {
+               const img = document.createElement('img');
+               img.src = e.target.result;
+               previewContainer.appendChild(img);
+           };
+           reader.readAsDataURL(file);
+       }
    }
- }
+
+   function generateStarRating(rating) {
+       const starContainer = document.getElementById('seller-rating-stars');
+       starContainer.innerHTML = '';
+       const fullStars = Math.floor(rating);
+       const hasHalfStar = rating - fullStars >= 0.5;
+
+       for (let i = 0; i < fullStars; i++) {
+           const star = document.createElement('i');
+           star.classList.add('fas', 'fa-star');
+           starContainer.appendChild(star);
+       }
+
+       if (hasHalfStar) {
+           const halfStar = document.createElement('i');
+           halfStar.classList.add('fas', 'fa-star-half-alt');
+           starContainer.appendChild(halfStar);
+       }
+
+       const emptyStars = 5 - Math.ceil(rating);
+       for (let i = 0; i < emptyStars; i++) {
+           const emptyStar = document.createElement('i');
+           emptyStar.classList.add('far', 'fa-star');
+           starContainer.appendChild(emptyStar);
+       }
+   }
+
+   const sellerRating = 3.0;
+   generateStarRating(sellerRating);
 </script>
 
 <script src="/static/js/prod_post_verification.js"></script>

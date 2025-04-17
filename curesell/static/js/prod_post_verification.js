@@ -40,6 +40,10 @@ function validateForm() {
     } else {
       descriptionError.style.display = 'none';
     }
+
+    // Dynamic rating sample
+    const sellerRatingValue = '4.0/5.0';
+    document.getElementById('seller-rating-value').textContent = sellerRatingValue;
   
     return isValid; // Prevent form submission if validation fails
   }
