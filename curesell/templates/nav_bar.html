@@ -1,34 +1,34 @@
 <div class="nav-header">
     <!-- the logo with text on top left -->
-    <a href="/home_page" class="logo-link">
+    <!-- <a href="/search_default" class="logo-link">
         <div class="logo-with-name">
             <img class="logo" src="/static/img/logo_rounded.png" />
             <div class="cu-resell">CUResell</div>
         </div>
+    </a> -->
+    <a href="/search_default" class="logo-link">
+        <img class="logo" src="/static/img/logo_rounded.png" />
+        <div class="cu-resell">CUResell</div>
     </a>
+    
 
     <!-- the menu on the top right -->
     <div class="nav-menu">
-        <a href="/search" class="nav-menu-item">Search</a>
-        <a href="/templates/ProductPost.html" class="nav-menu-item">Post</a>
+        <!-- <a href="/search" class="nav-menu-item">Search</a>
+        <a href="/ProductPost" class="nav-menu-item">Post</a>
         <a href="/chats" class="nav-menu-item">Chats</a>
-        <a onclick="goToProfile()" class="nav-menu-item">Profile</a>
-        <a onclick="goToHomepage()" class="nav-menu-item">Login/Register</a>
+        <a href="/templates/profile.html" class="nav-menu-item">Profile</a> -->
+        <div class="nav-menu-item">
+            <a href="/search">Search</a>
+            <a href="/ProductPost">Post</a>
+            <a href="/chats">Chats</a>
+            <a href="/templates/profile.html">Profile</a>
+        </div>
         <div class="cart-button">
-            <a href="/cart" class="nav-cart-text">Cart(3)</a>
+            <a href="/logout" class="nav-cart-text">Logout</a>
+        </div>
+        <div class="cart-button">
+            <a href="/cart" class="nav-cart-text">Cart</a>
         </div>
     </div>
-    <script>
-        function goToHomepage() {
-            // Redirect to the homepage
-            window.location.href = "{% url 'homepage' %}";
-        }
-        function goToProfile() {
-            // Redirect to the homepage
-            window.location.href = "{% url 'profile' %}";
-        }
-    </script>
-    <script src="/static/js/jquery-3.3.1.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/file.js"></script>
 </div>

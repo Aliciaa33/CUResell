@@ -49,15 +49,6 @@
                 {% if errors.confirm_password %}<span class="error_tip">{{ errors.confirm_password }}</span>{% endif %}
             </div>
 
-            <!-- input of contact_method -->
-            <div class="info">
-                <i class='bx bx-lock-alt'></i>
-                <input type="contact_link" name="contact_link" id="contact_link" placeholder="Set contact_link"
-                    value="{{ contact_link|default:'' }}" />
-                <span class="error_tip">prompt message</span>
-                
-            </div>
-
             <input type="submit" class="reg-btn" id="register_btn" value="Register">
         </form>
     </div>
