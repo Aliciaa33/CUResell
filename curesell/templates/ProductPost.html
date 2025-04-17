@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/static/css/post_prod.css">
   <link rel="stylesheet" href="/static/css/nav_bar.css">
 
-  <title>Post Product</title>
+  <title>CUResell</title>
 </head>
 
 <body>
@@ -28,7 +28,8 @@
     <!-- form title -->
     <div class="post_form_title">Post a Product for Sell!</div>
 
-    <form id="prod_post_form" action="/user/prod_post_handle/" method="post" onsubmit="return validateForm()">
+    <form id="prod_post_form" action="/prod_post_handle/" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+      {% csrf_token %}
       <!-- Title Input -->
       <label for="prod_title" class="field-title">1. Title</label>
       <div class="input_bar">

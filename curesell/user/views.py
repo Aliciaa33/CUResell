@@ -7,14 +7,10 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 import random
 
-# def welcome(request):
-#     return HttpResponse("Testing: Hello World!")
-
 def homepage(request):
     return render(request,'homepage.html')
 
 def login(request):
-    # return render(request,'login.html')
     uname = request.COOKIES.get('uname','')
     context = {'uname' : uname}
     return render(request,'login.html',context)
@@ -110,9 +106,12 @@ def send_code_handle(request):
         [email],
         fail_silently=False,
     )
+<<<<<<< Updated upstream
     context = {'title': 'Verify', 'email': email, 'error_msg':'Wrong Code'}
+=======
+
+>>>>>>> Stashed changes
     return render(request, 'verify.html')
-    # return JsonResponse({'success': True, 'message': 'Verification code sent!'})
 
 def verification_handle(request):
     usercode = request.POST.get('code')
@@ -130,12 +129,20 @@ def profile(request):
 
     userinfo = UserInfo.objects.filter(username=username).first()
 
+<<<<<<< Updated upstream
 
     contact_link = userinfo.contact_link
+=======
+    # contact_link = userinfo.contact_link
+>>>>>>> Stashed changes
     rate = userinfo.rate
     if username == None:
         context = { 'error_msg': 'please login first'}
         return render(request, 'profile.html', context)
     else:
+<<<<<<< Updated upstream
         context = {'username': username, 'contact_link': contact_link, 'rate1': rate, 'rate2': int(rate*100)}
+=======
+        context = {'username': username, 'rate1': rate, 'rate2': int(rate*100)}
+>>>>>>> Stashed changes
         return render(request, 'profile.html', context)
