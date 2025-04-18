@@ -71,11 +71,9 @@ def register_handle(request):
     user = UserInfo()
     user.username = username
     user.password = upwd3
-    user.rate= 3.0
     user.contact_link = contact_link
     user.save()
-    # return redirect('/login')
-    # return redirect('/verification')
+    request.session['username'] = username
     return redirect('/send_code')
 
 def skip_verify(request):
@@ -96,7 +94,7 @@ def send_code_handle(request):
 
     # Store the latest code in the session
     request.session['verification_code'] = verification_code
-    # print(f"Verification code: {verification_code}")
+    request.session['user_email'] = email
 
     # Send email
     send_mail(
@@ -106,19 +104,19 @@ def send_code_handle(request):
         [email],
         fail_silently=False,
     )
-<<<<<<< Updated upstream
-    context = {'title': 'Verify', 'email': email, 'error_msg':'Wrong Code'}
-=======
-
->>>>>>> Stashed changes
     return render(request, 'verify.html')
 
 def verification_handle(request):
     usercode = request.POST.get('code')
     generated = request.session.get('verification_code')
-    # print(f"stored code : {generated}")
     
     if str(usercode) == str(generated):
+        username = request.session.get('username')
+        user_email = request.session.get('user_email')
+        user = UserInfo.objects.filter(username=username).first()
+        if user:
+            user.email = user_email
+            user.save()
         return redirect('/login')
     
     context = {'title': 'Verify', 'error_msg': 'Wrong Code'}
@@ -129,20 +127,11 @@ def profile(request):
 
     userinfo = UserInfo.objects.filter(username=username).first()
 
-<<<<<<< Updated upstream
-
-    contact_link = userinfo.contact_link
-=======
     # contact_link = userinfo.contact_link
->>>>>>> Stashed changes
     rate = userinfo.rate
     if username == None:
         context = { 'error_msg': 'please login first'}
         return render(request, 'profile.html', context)
     else:
-<<<<<<< Updated upstream
-        context = {'username': username, 'contact_link': contact_link, 'rate1': rate, 'rate2': int(rate*100)}
-=======
         context = {'username': username, 'rate1': rate, 'rate2': int(rate*100)}
->>>>>>> Stashed changes
         return render(request, 'profile.html', context)

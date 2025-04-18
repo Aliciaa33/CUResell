@@ -2,7 +2,7 @@
 
 
 .nav-header {
-    background: #f5c426;
+    background: linear-gradient(to right, #FFD700, #FFDB58);
     padding: 8px 24px;
     /* Reduced padding for less blank space */
     display: flex;
@@ -20,11 +20,17 @@
     /* Ensure the header stays above other content */
 }
 
+.logo-link {
+    display: inline-block;
+    align-items: center;
+}
+
 .logo-with-name {
     flex-shrink: 0;
     width: 291px;
     height: 60px;
     position: static;
+    align-items: center;
 }
 
 .logo {
@@ -41,6 +47,7 @@
     object-fit: cover;
     aspect-ratio: 50/45;
     /* Maintain the aspect ratio */
+    margin-top: 5px;
 }
 
 .cu-resell {
@@ -58,6 +65,7 @@
     top: 15px;
     /* Adjusted top position to align with reduced height */
     width: 216px;
+    margin-top: 8px;
 }
 
 .nav-menu {
@@ -74,27 +82,30 @@
 }
 
 /* Shared style for all menu items */
-.nav-menu-item {
-    color: #000000;
+.nav-menu-item a {
+    float: left;
+    display: block;
+    /* color: #000000; */
+    color: rgb(79, 76, 76);
     text-align: center;
     font-family: "Inter-Regular", sans-serif;
     font-size: 14px;
     /* Reduced font size for menu items */
     line-height: 130%;
-    font-weight: 400;
-    padding: 6px;
+    font-weight: 700;
+    padding: 30px 10px;
     /* Adjust padding for smaller text */
     text-decoration: none;
     /* Remove underline from links */
-    border-radius: 8px;
     /* Optional: Add rounded corners */
     transition: background-color 0.3s ease;
     /* Smooth hover effect */
 }
 
 /* Hover effect for menu items */
-.nav-menu-item:hover {
-    background-color: #f5c426;
+.nav-menu-item a:hover {
+    /* background-color: #f5c426; */
+    background-color: #622b8c;
     /* Highlight background on hover */
     color: #ffffff;
     /* Change text color on hover */

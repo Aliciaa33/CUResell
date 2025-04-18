@@ -17,7 +17,6 @@ def prod_post_handle(request):
     title = post.get('prod_title')
     # type = post.get('type')
     price = post.get('prod_price')
-    address = post.get('address')
     # picture = post.get('picture')
     picture = request.FILES['prod_image']
     fname = '%s/product/%s' % (settings.MEDIA_ROOT, picture.name)
@@ -28,5 +27,5 @@ def prod_post_handle(request):
     user_id = request.session.get('user_id')
     user = UserInfo.objects.filter(id=user_id)[0]
     # ProductInfo.goods.create_good(title,type,'goods/'+picture.name,price,address,description,user)
-    ProductInfo.product.create_prod(title, description, picture, price, user)
+    ProductInfo.product.create_prod(title, description, 'product/'+picture.name, price, user)
     return redirect('/search')

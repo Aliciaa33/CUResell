@@ -134,8 +134,8 @@ MEDIA_ROOT=BASE_DIR / "static/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.qq.com'
-EMAIL_PORT = 587  # or 465 for SSL
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '1879988594@qq.com'
-EMAIL_HOST_PASSWORD = 'mvfobslfixbsbhee'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 465  # 465 for SSL
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'curesell@163.com'
+EMAIL_HOST_PASSWORD = 'SJtNkkfgupPxxgLR'

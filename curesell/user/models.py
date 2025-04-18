@@ -4,10 +4,6 @@ from django.db import models
 class UserInfo(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=40)
-<<<<<<< Updated upstream
-    number = models.CharField(max_length=30,default='')
-    contact_link = models.CharField(max_length=40,default='')
-=======
     email = models.CharField(max_length=30,default='')
->>>>>>> Stashed changes
+    contact_link = models.CharField(max_length=40,default='')
     rate = models.FloatField(default=5.0)
