@@ -79,8 +79,8 @@ def register_handle(request):
 def skip_verify(request):
     return render(request,'login.html')
     
-def verification(request):
-    return render(request,'verification.html')
+# def verification(request):
+#     return render(request,'verification.html')
 
 def search(request):
     return render(request,'search_default.html')
@@ -117,6 +117,7 @@ def verification_handle(request):
         if user:
             user.email = user_email
             user.save()
+        request.session.flush()
         return redirect('/login')
     
     context = {'title': 'Verify', 'error_msg': 'Wrong Code'}
