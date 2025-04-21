@@ -24,7 +24,8 @@
 
   <div class="search-container">
     <div class="search-controls">
-        <form class="search-form" action="/after_search" method="GET">
+        <form class="search-form" action="/after_search/" method="post">
+            {% csrf_token %}
             <input type="text" name="query" placeholder="Search..." class="search-input">
             <button type="submit" class="search-button">Search</button>
         </form>
@@ -50,18 +51,18 @@
     <!-- product cards -->
     <div class="product-grid">
         {% for product in products %}
-        <div class="product-card">
+        <div class="product-card" data-id="{{ product.title }}">
             <img src="/static/{{product.picture}}" alt="{{ product.title }}" class="product-image">
-            <a href="/detail/?title={{ product.title }}" class="product-title">{{ product.title }}</a>
+            <p class="product-title">{{ product.title }}</p>
             <p class="product-price">${{ product.price }}</p>
         </div>
         {% endfor %}
     </div>
 </div>
 
-<!-- <script src="/static/js/search_product_display.js"></script> -->
-<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/search_product_display.js"></script>
+<!-- <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/file.js"></script>
+<script src="/static/js/file.js"></script> -->
 </body>
 </html>

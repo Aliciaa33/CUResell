@@ -12,8 +12,17 @@ def ProductPost(request):
     return render(request,'ProductPost.html')
 
 def search_default(request):
-    products = ProductInfo.product.get_all() # get all products in current database
+    # get all products in current database
+    products = ProductInfo.product.get_all() 
     return render(request,'search_default.html', {'products': products})
+
+def after_search(request):
+    search_title = request.POST.get('query')
+    if search_title == '':
+        return redirect('/search_default')
+    products = ProductInfo.product.filter(title__contains=search_title)
+    context = {'products':products, 'search_title':search_title}
+    return render(request, 'after_search.html', context)
 
 def generate_random_string(length=8):
     """Generate a random string of fixed length."""
