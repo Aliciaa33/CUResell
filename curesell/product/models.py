@@ -3,23 +3,13 @@ from user.models import UserInfo
 
 # Create your models here.
 class ProdInfoManager(models.Manager):
-    # def get_books(self):
-    #     return super(ProdInfoManager, self).get_queryset().filter(type='books',isDelete=False)
-    # def get_digital(self):
-    #     return super(ProdInfoManager, self).get_queryset().filter(type='digital',isDelete=False)
-    # def get_cloth(self):
-    #     return super(ProdInfoManager, self).get_queryset().filter(type='cloth',isDelete=False)
-    # def get_daily(self):
-    #     return super(ProdInfoManager, self).get_queryset().filter(type='daily',isDelete=False)
-    # def get_traffic(self):
-    #     return super(ProdInfoManager, self).get_queryset().filter(type='traffic',isDelete=False)
-    # def get_other(self):
-    #     return super(ProdInfoManager, self).get_queryset().filter(type='other',isDelete=False)
     def get_title(self, title):
-        return super(ProdInfoManager, self).get_queryset().filter(title=title,isDelete=False)
+        return super(ProdInfoManager, self).get_queryset().filter(title=title,isSold=False)
     def create_prod(self, title, description, picture, price, seller):
         prod = self.create(title=title, description=description, picture=picture, price=price, isSold=False, seller=seller)
         return prod
+    def get_all(self):
+        return super(ProdInfoManager, self).get_queryset()
     
 class ProductInfo(models.Model):
     title = models.CharField(max_length=20)

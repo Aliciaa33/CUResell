@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^ProductPost/$',views.ProductPost),
     url(r'^search_default/$',views.search_default),
     url(r'^prod_post_handle/$',views.prod_post_handle),
+    url(r'^detail/$',views.detail),
 ]

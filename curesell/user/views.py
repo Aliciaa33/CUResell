@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
-from .models import *
+from user.models import UserInfo
+from product.models import ProductInfo
 from django.conf import settings
 from hashlib import sha1
-from .models import *
 from django.core.mail import send_mail
 from django.http import JsonResponse
 import random
@@ -83,7 +83,8 @@ def skip_verify(request):
 #     return render(request,'verification.html')
 
 def search(request):
-    return render(request,'search_default.html')
+    products = ProductInfo.product.get_all() # get all products in current database
+    return render(request,'search_default.html', {'products': products})
 
 def send_code(request):
     return render(request,'email.html')

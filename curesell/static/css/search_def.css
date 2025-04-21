@@ -117,6 +117,14 @@
 .product-title {
   color: #333;
   margin: 10px 0;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.product-title:hover{
+  color: #5e5b5b;
+  text-decoration: underline;
 }
 
 .product-price {

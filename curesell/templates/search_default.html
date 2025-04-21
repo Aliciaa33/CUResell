@@ -51,15 +51,17 @@
     <div class="product-grid">
         {% for product in products %}
         <div class="product-card">
-            <img src="/static/img/logo.jpg" alt="{{ product.name }}" class="product-image">
-            <h3 class="product-title">{{ product.name }}</h3>
+            <img src="/static/{{product.picture}}" alt="{{ product.title }}" class="product-image">
+            <a href="/detail/?title={{ product.title }}" class="product-title">{{ product.title }}</a>
             <p class="product-price">${{ product.price }}</p>
         </div>
         {% endfor %}
     </div>
 </div>
 
-<script src="/static/js/search_product_display.js"></script>
-  
+<!-- <script src="/static/js/search_product_display.js"></script> -->
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/file.js"></script>
 </body>
 </html>
