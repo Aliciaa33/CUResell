@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/search_def.css">
+    <link rel="stylesheet" href="/static/css/nav_bar.css">
+    <title>CUResell</title>
+
+</head>
+
+<body>
+    <!-- Include the navigation bar -->
+    {% include 'nav_bar.html' %}
+    <!-- <div id="nav-bar"></div>
+  <script>
+    fetch('/templates/nav_bar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-bar').innerHTML = data;
+        });
+  </script> -->
+
+    <div class="search-container">
+        <div class="search-controls">
+            <form class="search-form" action="/after_search/" method="post">
+                {% csrf_token %}
+                <input type="text" name="query" placeholder="Search..." class="search-input">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+
+            <div class="filter-buttons">
+                <button class="default-btn">Default</button>
+
+                <div class="sort-dropdown">
+                    <button class="sort-btn">Sort ▾</button>
+                    <div class="sort-options">
+                        <label><input type="checkbox" value="rating_high_low"> Seller Rating (High to Low)</label>
+                        <label><input type="checkbox" value="rating_low_high"> Seller Rating (Low to High)</label>
+                        <label><input type="checkbox" value="price_high_low"> Price (High to Low)</label>
+                        <label><input type="checkbox" value="price_low_high"> Price (Low to High)</label>
+                        <label><input type="checkbox" value="date_old_new"> Post Date (Oldest First)</label>
+                        <label><input type="checkbox" value="date_new_old"> Post Date (Newest First)</label>
+                        <button class="apply-btn">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="keyword">Keyword: {{ search_title }}</p>
+        <!-- product cards -->
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="/static/{{product.picture}}" alt="{{ product.title }}" class="product-image">
+                <a href="/detail/?title={{ product.title }}" class="product-title">{{ product.title }}</a>
+                <p class="product-price">${{ product.price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="/static/js/search_product_display.js"></script>
+</body>
+
+</html>

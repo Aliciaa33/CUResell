@@ -1,0 +1,149 @@
+iframe[seamless] {
+  border: none;
+}
+
+.product-post,
+.product-post * {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f5f5f5;
+  min-height: 100vh;
+  position: relative;
+  overflow: auto;
+}
+
+/**************************************************************************************/
+/*below are the css for the form body*/
+
+.prod_info_container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.item_info_title {
+  text-align: left;
+  font-size: 36px;
+  font-family: "Inter-Bold", sans-serif;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.item_price {
+  text-align: left;
+  font-size: 28px;
+  font-weight: bold;
+  color: #426b1f;
+  margin-bottom: 20px;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.image-container img {
+  height: 200px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+
+.description {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #666;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button_chat {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #622b8c;
+  border: none;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+}
+
+.button_buy {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0c0c0c;
+  background-color: #fff700;
+  border: none;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: #f7e9e5;
+}
+
+/* Image preview styling */
+.image-preview {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.seller-rating {
+  display: flex;
+  color: #622b8c;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.seller-rating i {
+  color: #f5c426; 
+  font-size: 20px; 
+  margin-right: 2px; 
+}
+
+.seller-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.seller-icon {
+  font-size: 30px;
+  color: #622b8c;
+  margin-right: 10px;
+}
+
+.seller-name {
+  font-size: 18px;
+  color: #622b8c;
+  font-weight: bold;
+}

@@ -1,0 +1,36 @@
+<div class="nav-header">
+    <!-- the logo with text on top left -->
+    <a href="/search" class="logo-link">
+        <img class="logo" src="/static/img/logo_rounded.png" />
+        <div class="cu-resell">CUResell</div>
+    </a>
+
+    <!-- the menu on the top right -->
+    <div class="nav-menu">
+        <div class="nav-menu-item">
+            <a href="/search">Home</a>
+            <a href="/ProductPost">Post</a>
+            <!-- <a href="/chats">Chats</a> -->
+            <a href="/profile">Profile</a>
+        </div>
+        <div class="cart-button">
+            <a href="/logout" class="nav-cart-text">Logout</a>
+        </div>
+        <div class="cart-button">
+            <a href="/cart" class="nav-cart-text">Cart</a>
+        </div>
+    </div>
+    <script>
+        function goToHomepage() {
+            // Redirect to the homepage
+            window.location.href = "{% url 'homepage' %}";
+        }
+        function goToProfile() {
+            // Redirect to the homepage
+            window.location.href = "{% url 'profile' %}";
+        }
+    </script>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/file.js"></script>
+</div>
