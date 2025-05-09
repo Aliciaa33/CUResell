@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^after_search/$',views.after_search),
     url(r'^prod_post_handle/$',views.prod_post_handle),
     url(r'^detail/$',views.detail),
+    url(r'^make_transaction/$', views.make_transaction, name='make_transaction'),
 ]

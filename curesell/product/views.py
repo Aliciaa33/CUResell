@@ -63,14 +63,14 @@ def make_transaction(request):
     user_id = request.session.get('user_id')
     buyer = UserInfo.objects.get(id=user_id)
     product_id = post.get('product_id')
-    product = ProductInfo.objects.get(id=product_id)
+    product = ProductInfo.product.filter(id=product_id)[0]
 
     if not buyer.email.strip():
-        message.error(request,"Your account has not yet been verified via email.")
+        messages.error(request,"Your account has not yet been verified via email.")
         return render(request, 'verification.html')
 
     if product.isSold:
-        message.error(request,"This product has been sold.")
+        messages.error(request,"This product has been sold.")
         context = {'product': product}
         print(product.title)
         return render(request, 'product_info.html', context)

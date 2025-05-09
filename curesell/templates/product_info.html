@@ -48,9 +48,14 @@
          <img src="/static/{{ product.picture }}">
       </div>
 
-      <div class="button-container" style="justify-content: flex-end;">
-         <button class="button_buy">Buy It Now</button>
-      </div>
+    <form method="post" action="/make_transaction/">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <div class="button-container" style="justify-content: flex-end;">
+            <button type="submit" class="button_buy">Buy It Now</button>
+        </div>
+    </form>
+
    </div>
 </body>
 
