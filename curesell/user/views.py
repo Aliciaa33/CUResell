@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 import random
 import sqlite3
+from django.contrib import messages
+
 
 def homepage(request):
     return render(request,'homepage.html')
@@ -88,6 +90,7 @@ def send_code(request):
 
 def send_code_handle(request):
     email = request.POST.get('email')
+
     verification_code = random.randint(100000, 999999)  # Generate a new 6-digit code
 
     # Store the latest code in the session
