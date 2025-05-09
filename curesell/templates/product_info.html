@@ -8,6 +8,7 @@
    <link rel="stylesheet" href="/static/css/global.css" />
    <link rel="stylesheet" href="/static/css/nav_bar.css">
    <link rel="stylesheet" href="/static/css/prod_info.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -22,40 +23,32 @@
          });
    </script> -->
 
+   <div style="height: 50px;"></div>
+
    <!-- Product info container-->
    <div class="prod_info_container">
 
       <!-- item_info_title -->
-      <div class="item_info_title">Item Name</div>
+      <div class="item_info_title"></span>{{ product.title }}</span></div>
 
       <!-- Price -->
-      <div class="item_price">$ 99.99</div>
+      <div class="item_price"></span>{{ product.price }}</span></div>
         
       <div class="seller-info">
           <i class="fas fa-user-circle seller-icon"></i>
-          <span class="seller-name">Username</span>
+          <span class="seller-name"></span>{{ product.user_id}}</span></span> 
       </div>
 
-      <div class="seller-rating"> <span id="seller-rating-stars"></span></div>
+      <div class="seller-rating"> <span id="seller-rating-stars"></span></div> 
 
       <!-- Description -->
-      <label class="description">Here is the short description of the Item, and there will be many words in here, it might be 1000 words in english so that it could gives clear description</label>
+      <label class="description"></span>{{ product.description }}</span></label>
 
       <div class="image-container">
-         <img src="/static/img/logo_rounded.png" alt="the testing logo">
-         <img src="/static/img/logo.jpg" alt="the testing logo">
-         <img src="/static/img/logo.jpg" alt="the testing logo">
-         <img src="/static/img/logo.jpg" alt="the testing logo">
-         <img src="/static/img/logo_rounded.png" alt="the testing logo">
+         <img src="/static/{{ product.picture }}">
       </div>
 
-      <div class="button-container">
-         <button class="button">Adding to shopping cart</button>
-         <button class="button">Make payment</button>
-      </div>
-
-      <div class="button-container">
-         <button class="button_chat">Chat with Seller</button>
+      <div class="button-container" style="justify-content: flex-end;">
          <button class="button_buy">Buy It Now</button>
       </div>
    </div>
