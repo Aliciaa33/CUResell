@@ -49,7 +49,6 @@ def register_handle(request):
     username = post.get('username')
     password = post.get('password')
     password2 = post.get('password2')
-    contact_link = post.get('contact_link')
     errors = {}
     if UserInfo.objects.filter(username=username).exists():
         errors['username'] = "- Username already existed"
@@ -59,20 +58,17 @@ def register_handle(request):
             'error': errors,
             'username': username,
             'password': password,
-            'password2': password2,
-            'contact_link': contact_link
+            'password2': password2
         }
         return render(request, 'register.html', context)
     
     # update database if valid
-    print(contact_link)
     s1 = sha1()
     s1.update(password.encode('utf8'))
     upwd3 = s1.hexdigest()
     user = UserInfo()
     user.username = username
     user.password = upwd3
-    user.contact_link = contact_link
     user.save()
     request.session['username'] = username
     return redirect('/send_code')
@@ -130,7 +126,6 @@ def profile(request):
 
     userinfo = UserInfo.objects.filter(username=username).first()
 
-    # contact_link = userinfo.contact_link
     rate = userinfo.rate
     if username == None:
         context = { 'error_msg': 'please login first'}
