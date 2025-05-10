@@ -77,9 +77,6 @@ def register_handle(request):
 
 def skip_verify(request):
     return render(request,'login.html')
-    
-# def verification(request):
-#     return render(request,'verification.html')
 
 def search(request):
     products = ProductInfo.product.get_all() # get all products in current database
@@ -87,6 +84,11 @@ def search(request):
 
 def send_code(request):
     return render(request,'email.html')
+
+def check_email(request):
+    email = request.POST.get('email')
+    exists = UserInfo.objects.filter(email=email).exists()
+    return JsonResponse({'exists': exists})
 
 def send_code_handle(request):
     email = request.POST.get('email')
