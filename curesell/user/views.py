@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirec
 from user.models import UserInfo
 from product.models import ProductInfo
 from transaction.models import Transaction
+from transaction.views import update_user_rate
 from django.conf import settings
 from hashlib import sha1
 from django.core.mail import send_mail
@@ -9,7 +10,7 @@ from django.http import JsonResponse
 import random
 import sqlite3
 from django.contrib import messages
-
+from django.views.decorators.http import require_http_methods
 
 def homepage(request):
     return render(request,'homepage.html')
@@ -160,8 +161,40 @@ def purchase_records(request):
     userinfo = UserInfo.objects.filter(username=username).first()
     all_records = Transaction.objects.all()
     records=[]
-    for record in all_records:
+    for index, record in enumerate(all_records):
         if record.buyer==userinfo:
-            records.append({"prod":record.product,"rate":record.rate,"price":record.price,"date":record.date})
+            records.append({"prod":record.product,"rate":record.rate,"price":record.price,"date":record.date,"transaction_index":index})
     content={'records': records}
     return render(request, 'purchase_records.html', content)
+
+@require_http_methods(["GET", "POST"])
+def rate_purchases(request):
+    if request.method == "POST":
+        # Get the product ID and rating from the request
+        product_id = request.POST.get("product_id")
+        rating = request.POST.get("rating")
+
+        # Validate the inputs
+        if not product_id or not rating:
+            return JsonResponse({"error": "Product ID and rating are required."}, status=400)
+
+        try:
+            # Convert rating to an integer
+            rating = int(rating)
+            if rating < 1 or rating > 5:
+                raise ValueError("Rating must be between 1 and 5.")
+        except ValueError as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+        print(f"Rating for product {product_id}: {rating}")
+
+        # Update the rating in the database
+        all_records = Transaction.objects.all()
+        the_records = all_records[int(product_id)]
+        the_records.rate = rating
+        the_records.save()
+        seller = the_records.product.seller
+        update_user_rate(seller.username)
+
+
+        return JsonResponse({"success": "Rating submitted successfully."})

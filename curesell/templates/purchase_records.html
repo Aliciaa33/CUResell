@@ -67,35 +67,32 @@
                         <th scope="col">Product Name</th>
                         <th scope="col">Purchase Time</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Link</th>
                         <th scope="col">Rate</th>
-                        <th scope="col">Change-the-rate</th>
+                        <th scope="col">Change-the-rate(int 1-5)</th>
                   <tbody>
                     {% for record in records %}
                     <tr>
                         <td>{{ record.prod.title }}</td>
                         <td>{{ record.date }}</td>
-                        <td>{{ record.price }}</td>
-                        {% if record.isSold %}
-                        <td>sold</td>
-                        {% else %}<td>unsold</td>{% endif %}
-                        <td><a href="/detail/?title={{ record.title }}">link</a></td>
-                        <td>{{ record.price }}/5</td>
-                        <td><div class="input-container">
-                          <form id="numberForm" method="POST" action="/your-django-url/">
-                              {% csrf_token %}
-                              <input type="number" 
-                                     name="number" 
-                                     id="numberInput" 
-                                     class="number-input" 
-                                     placeholder="int 1-5">
-                              <div id="errorMessage" class="error-message">
-                                  please put integer between 1 to 5
-                              </div>
-                              <button type="submit" class="submit-btn">confirm</button>
-                          </form>
-                      </div></td>
+                        <td>{{ record.price  }}</td>
+                        <td><a href="/detail/?title={{ record.prod.title }}">link</a></td>
+                        <td>{{ record.rate }}/5</td>
+                        <td><div class="rating-container">
+                            <form class="rating-form" data-product-id="{{ record.transaction_index }}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ record.transaction_index }}">
+                                <input type="number" 
+                                       name="rating" 
+                                       class="rating-input" 
+                                       placeholder="1-5分"
+                                       value="{{ record.rate }}"
+                                       min="1" 
+                                       max="5">
+                                <button type="submit" class="submit-btn">submit rate</button>
+                                <span class="error-message">input integer 1-5</span>
+                            </form>
+                        </div></td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -114,5 +111,49 @@
     }
 
   </script>
+  <script>
+    document.querySelectorAll('.rating-form').forEach(form => {
+        const input = form.querySelector('.rating-input');
+        const errorMessage = form.querySelector('.error-message');
+
+        function validateInput(value) {
+            const numValue = parseInt(value);
+            return !isNaN(numValue) && numValue >= 1 && numValue <= 5 && Number.isInteger(numValue);
+        }
+
+        input.addEventListener('input', function() {
+            if (!validateInput(this.value)) {
+                this.classList.add('error');
+                errorMessage.style.display = 'inline';
+            } else {
+                this.classList.remove('error');
+                errorMessage.style.display = 'none';
+            }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateInput(input.value)) {
+                input.classList.add('error');
+                errorMessage.style.display = 'inline';
+                return;
+            }
+
+            const formData = new FormData(this);
+            fetch('{% url "rate_purchases" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                    location.reload();  // 刷新页面
+            })
+        });
+    });
+</script>
 </body>
 </html>
