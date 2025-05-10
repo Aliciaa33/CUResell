@@ -52,10 +52,13 @@ body {
 }
 
 .image-container img {
-  height: 200px;
-  width: auto;
+  /* height: 200px;
+  width: auto; */
   object-fit: cover;
   border-radius: 4px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  height: auto;
 }
 
 

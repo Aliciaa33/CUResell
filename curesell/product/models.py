@@ -3,13 +3,21 @@ from user.models import UserInfo
 
 # Create your models here.
 class ProdInfoManager(models.Manager):
-    def get_title(self, title):
-        return super(ProdInfoManager, self).get_queryset().filter(title=title)
     def create_prod(self, title, description, picture, price, seller):
         prod = self.create(title=title, description=description, picture=picture, price=price, isSold=False, seller=seller)
         return prod
-    def get_all(self):
+    
+    # get the corrosponding product with the given title
+    def get_title(self, title):
+        return super(ProdInfoManager, self).get_queryset().filter(title=title)
+    
+    # get all unsold products
+    def get_unsold(self):
         return super(ProdInfoManager, self).get_queryset().filter(isSold=False)
+    
+    # get all products in the database
+    def get_all(self):
+        return super(ProdInfoManager, self).get_queryset()
     
 class ProductInfo(models.Model):
     title = models.CharField(max_length=20)

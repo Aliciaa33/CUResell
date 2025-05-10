@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^search/$',views.search),
     url(r'^profile/$',views.profile, name='profile'),
     url(r'^release_records/$',views.release_records, name='release_records'),
+    url(r'^purchase_records/$',views.purchase_records, name='purchase_records'),
 ]

@@ -16,15 +16,15 @@ def ProductPost(request):
     return render(request,'ProductPost.html')
 
 def search_default(request):
-    # get all products in current database
-    products = ProductInfo.product.get_all() 
+    # get all unsold products in current database
+    products = ProductInfo.product.get_unsold() 
     return render(request,'search_default.html', {'products': products})
 
 def after_search(request):
     search_title = request.POST.get('query')
     if search_title == '':
         return redirect('/search_default')
-    products = ProductInfo.product.filter(title__contains=search_title)
+    products = ProductInfo.product.filter(title__contains=search_title).exclude(isSold=True)
     context = {'products':products, 'search_title':search_title}
     return render(request, 'after_search.html', context)
 
@@ -70,7 +70,9 @@ def make_transaction(request):
 
     if product.isSold:
         return redirect(f'/product_info/?product_id={product_id}&error=sold')
-
+    
+    if product.seller.id == buyer.id:
+        return redirect(f'/product_info/?product_id={product_id}&error=own')
 
     Transaction.objects.create(
         buyer=buyer,

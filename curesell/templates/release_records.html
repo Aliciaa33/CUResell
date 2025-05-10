@@ -48,7 +48,7 @@
           <ul class="list-group">
               <li class="list-group-item"><a onclick="goToProfile()">presonal information</a></li>
               <li class="list-group-item"><a onclick="goToReleaseRecords()">release records</a></li>
-              <li class="list-group-item"><a href="purchase_record.html">purchase records</a></li>
+              <li class="list-group-item"><a onclick="goToPurchaseRecords()">purchase records</a></li>
               <li class="list-group-item"><a href="/send_code">verfication status</a></li>
           </ul>
       </div>
@@ -57,20 +57,22 @@
               <caption class="text-center">release records</caption>
                 <thead>
                     <tr>
-                        <th scope="col">item name</th>
-                        <th scope="col">release time</th>
-                        <th scope="col">price</th>
-                        <th scope="col">status</th>
-                        <th scope="col">link</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Release Time</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Link</th>
                   <tbody>
                     {% for product in products %}
                     <tr>
                         <td>{{ product.title }}</td>
                         <td>{{ product.posted_at }}</td>
                         <td>{{ product.price }}</td>
-                        {% if product.IsSold %}
-                        <td>sold</td>
-                        {% else %}<td>unsold</td>{% endif %}
+                        {% if product.isSold %}
+                          <td>sold</td>
+                        {% else %}
+                          <td>unsold</td>
+                        {% endif %}
                         <td><a href="/detail/?title={{ product.title }}">link</a></td>
                     </tr>
                     {% endfor %}
@@ -84,6 +86,9 @@
     }
     function goToReleaseRecords() {
         window.location.href = "{% url 'release_records' %}";
+    }
+    function goToPurchaseRecords() {
+        window.location.href = "{% url 'purchase_records' %}";
     }
   </script>
 </body>

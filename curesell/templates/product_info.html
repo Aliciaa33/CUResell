@@ -31,7 +31,7 @@
       <div class="item_info_title"></span>{{ product.title }}</span></div>
 
       <!-- Price -->
-      <div class="item_price"></span>{{ product.price }}</span></div>
+      <div class="item_price"></span>HK${{ product.price }}</span></div>
         
       {% comment %} <div class="seller-info">
           <i class="fas fa-user-circle seller-icon"></i>
@@ -110,12 +110,24 @@
     if (error === 'unverified') {
         if (confirm("Your email is not verified. Verify now?")) {
             window.location.href = "/send_code/";
+        } else {
+            window.history.back();
         }
     }
 
     if (error === 'sold') {
         if (confirm("This product is sold. Return to product list?")) {
             window.location.href = "/search_default/";
+        } else {
+            window.history.back();
+        }
+    }
+
+    if (error === 'own') {
+        if (confirm("You can't buy your own product. Return to product list?")) {
+            window.location.href = "/search_default/";
+        } else {
+            window.history.back();
         }
     }
 

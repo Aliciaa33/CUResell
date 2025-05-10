@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from user.models import UserInfo
 from product.models import ProductInfo
+from transaction.models import Transaction
 from django.conf import settings
 from hashlib import sha1
 from django.core.mail import send_mail
@@ -79,7 +80,7 @@ def skip_verify(request):
     return render(request,'login.html')
 
 def search(request):
-    products = ProductInfo.product.get_all() # get all products in current database
+    products = ProductInfo.product.get_unsold() # get all unsold products in current database
     return render(request,'search_default.html', {'products': products})
 
 def send_code(request):
@@ -153,3 +154,14 @@ def release_records(request):
                 user_products.append(product)
         content={'products': user_products}
         return render(request, 'release_records.html', content)
+    
+def purchase_records(request):
+    username = request.session.get('username')
+    userinfo = UserInfo.objects.filter(username=username).first()
+    all_records = Transaction.objects.all()
+    records=[]
+    for record in all_records:
+        if record.buyer==userinfo:
+            records.append(record.product)
+    content={'records': records}
+    return render(request, 'purchase_records.html', content)

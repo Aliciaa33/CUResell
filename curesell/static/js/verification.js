@@ -36,8 +36,6 @@ $(function(){
 		var email = $('#email').val();
 		if(email.endsWith('@link.cuhk.edu.hk'))
 		{
-            // $('#email').next().hide();
-			// error_email = false;
 			$.ajax({
 				url: '/check_email/', // Change to your backend endpoint
 				type: 'POST',
