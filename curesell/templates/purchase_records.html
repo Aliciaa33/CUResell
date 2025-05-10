@@ -48,33 +48,32 @@
           <ul class="list-group">
               <li class="list-group-item"><a onclick="goToProfile()">presonal information</a></li>
               <li class="list-group-item"><a onclick="goToReleaseRecords()">release records</a></li>
-              <li class="list-group-item"><a onclick="goToPurchaseRecords()">purchase records</a></li>
+              <li class="list-group-item"><a href="purchase_record.html">purchase records</a></li>
               <li class="list-group-item"><a href="/send_code">verfication status</a></li>
           </ul>
       </div>
       <div class="list_body">
           <table class="table">
-              <caption class="text-center">presonal information</caption>
+              <caption class="text-center">release records</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">item name</th>
+                        <th scope="col">release time</th>
+                        <th scope="col">price</th>
+                        <th scope="col">status</th>
+                        <th scope="col">link</th>
                   <tbody>
-                      <tr>
-                          <td>user name</td>
-                          <td>{% if username %}
-                                  {{ username }}
-                              {% else %}
-                                  <p style="color: red;">{{ error_msg }}</p>
-                              {% endif %}
-                        </td>
-                      </tr>
-                      <tr>
-                        <tr>
-                            <td>rate</td>
-                            <td class="rating-cell">
-                                <div class="stars">★★★★★</div>
-                                <div class="overlay">★★★★★</div>
-                            </td>
-                            <td>  {{rate1}}/ 5</td>
-                        </tr>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.title }}</td>
+                        <td>{{ product.posted_at }}</td>
+                        <td>{{ product.price }}</td>
+                        {% if product.IsSold %}
+                        <td>sold</td>
+                        {% else %}<td>unsold</td>{% endif %}
+                        <td><a href="/detail/?title={{ product.title }}">link</a></td>
                     </tr>
+                    {% endfor %}
                   </tbody>
               </table>     
       </div>     
@@ -85,9 +84,6 @@
     }
     function goToReleaseRecords() {
         window.location.href = "{% url 'release_records' %}";
-    }
-    function goToPurchaseRecords() {
-        window.location.href = "{% url 'purchase_record' %}";
     }
   </script>
 </body>

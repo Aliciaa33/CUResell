@@ -1,4 +1,4 @@
-from datetime import timezone
+from django.utils import timezone
 from django.shortcuts import render,redirect, HttpResponse
 from .models import *
 from django.conf import settings
@@ -66,15 +66,12 @@ def make_transaction(request):
     product = ProductInfo.product.filter(id=product_id)[0]
 
     if not buyer.email.strip():
-        messages.error(request,"Your account has not yet been verified via email.")
-        return render(request, 'verification.html')
+        return redirect(f'/product_info/?product_id={product_id}&error=unverified')
 
     if product.isSold:
-        messages.error(request,"This product has been sold.")
-        context = {'product': product}
-        print(product.title)
-        return render(request, 'product_info.html', context)
-    
+        return redirect(f'/product_info/?product_id={product_id}&error=sold')
+
+
     Transaction.objects.create(
         buyer=buyer,
         product=product,
@@ -82,7 +79,6 @@ def make_transaction(request):
         date=timezone.now(),
         rate=5
     )
-
     product.isSold = True
     product.save()
 
@@ -95,5 +91,4 @@ def make_transaction(request):
     seller.save()
 
     return redirect('/search_default')
-
 
