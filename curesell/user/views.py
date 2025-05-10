@@ -162,6 +162,6 @@ def purchase_records(request):
     records=[]
     for record in all_records:
         if record.buyer==userinfo:
-            records.append(record.product)
+            records.append({"prod":record.product,"rate":record.rate,"price":record.price,"date":record.date})
     content={'records': records}
     return render(request, 'purchase_records.html', content)

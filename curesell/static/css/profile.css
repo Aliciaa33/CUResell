@@ -21,8 +21,8 @@
 }
 /* 让整个列表区域居中，并增加美观的背景 */
 .list {
-    /* width: 95%; */
-    max-width: 800px;
+    width: 95%; 
+    max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -96,7 +96,7 @@
 }
 
 /* 响应式优化，使其适应不同设备 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .list {
         width: 95%;
         padding: 15px;

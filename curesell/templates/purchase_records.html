@@ -10,32 +10,39 @@
   <link rel="stylesheet" href="/static/css/nav_bar.css">
   <link rel="stylesheet" href="/static/css/profile.css">
   <style>
-    .rating-cell {
-        position: relative;
-        display: inline-block;
+    .input-container {
+        margin: 20px;
+        font-family: Arial, sans-serif;
     }
-
-    .stars{
-        font-size: 24px;
-        color: gray;
-        position: absolute;
-        top: 7px;
-        left: 7px;
-        white-space: nowrap;
+    
+    .number-input {
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100px;
     }
-
-    .overlay {
-        width: {{ rate2 }}%;
-        font-size: 24px;
-        color: gold;
-        position: absolute;
-        overflow: hidden;
-        top: 7px;
-        left: 7px;
-        white-space: nowrap;
-        /* clip-path: inset(0 0% 0 0); */
+    
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
     }
-
+    
+    .submit-btn {
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: #984caf;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .submit-btn:hover {
+        background-color: #984caf;
+    }
   </style>
   <title>CUResell</title>
 </head>
@@ -62,16 +69,33 @@
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
                         <th scope="col">Link</th>
+                        <th scope="col">Rate</th>
+                        <th scope="col">Change-the-rate</th>
                   <tbody>
                     {% for record in records %}
                     <tr>
-                        <td>{{ record.title }}</td>
-                        <td>{{ record.posted_at }}</td>
+                        <td>{{ record.prod.title }}</td>
+                        <td>{{ record.date }}</td>
                         <td>{{ record.price }}</td>
                         {% if record.isSold %}
                         <td>sold</td>
                         {% else %}<td>unsold</td>{% endif %}
                         <td><a href="/detail/?title={{ record.title }}">link</a></td>
+                        <td>{{ record.price }}/5</td>
+                        <td><div class="input-container">
+                          <form id="numberForm" method="POST" action="/your-django-url/">
+                              {% csrf_token %}
+                              <input type="number" 
+                                     name="number" 
+                                     id="numberInput" 
+                                     class="number-input" 
+                                     placeholder="int 1-5">
+                              <div id="errorMessage" class="error-message">
+                                  please put integer between 1 to 5
+                              </div>
+                              <button type="submit" class="submit-btn">confirm</button>
+                          </form>
+                      </div></td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -88,6 +112,7 @@
     function goToPurchaseRecords() {
         window.location.href = "{% url 'purchase_records' %}";
     }
+
   </script>
 </body>
 </html>
