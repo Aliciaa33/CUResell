@@ -13,7 +13,13 @@ def product_info(request):
     return render(request,'product_info.html')
 
 def ProductPost(request):
-    return render(request,'ProductPost.html')
+    username = request.session.get('username')
+    userinfo = UserInfo.objects.filter(username=username).first()
+
+    if userinfo and userinfo.email != '':
+        return render(request, 'ProductPost.html')
+    else:
+        return redirect('/send_code')
 
 def search_default(request):
     # get all unsold products in current database

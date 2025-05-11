@@ -46,10 +46,10 @@
     <div class="list">
       <div class="list_nav "> 
           <ul class="list-group">
-              <li class="list-group-item"><a onclick="goToProfile()">presonal information</a></li>
+              <li class="list-group-item"><a onclick="goToProfile()">personal information</a></li>
               <li class="list-group-item"><a onclick="goToReleaseRecords()">release records</a></li>
               <li class="list-group-item"><a onclick="goToPurchaseRecords()">purchase records</a></li>
-              <li class="list-group-item"><a href="/send_code">verfication status</a></li>
+              <li class="list-group-item"><a onclick="goToVerification()">verification status</a></li>
           </ul>
       </div>
       <div class="list_body">
@@ -89,6 +89,18 @@
     }
     function goToPurchaseRecords() {
         window.location.href = "{% url 'purchase_records' %}";
+    }
+    function goToVerification() {
+      fetch("{% url 'check_verification_status' %}")
+      .then(response => response.json())
+      .then(data => {
+        if(data.verified){
+          alert("You have already been verified!");
+        } else {
+          window.location.href = "/send_code/";
+        }
+      })
+
     }
   </script>
 </body>

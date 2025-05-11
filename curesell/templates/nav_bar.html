@@ -9,7 +9,7 @@
     <div class="nav-menu">
         <div class="nav-menu-item">
             <a href="/search">Home</a>
-            <a href="/ProductPost">Post</a>
+            <a onclick="goToProductPost()">Post</a>
             <!-- <a href="/chats">Chats</a> -->
             <a href="/profile">Profile</a>
         </div>
@@ -29,6 +29,25 @@
             // Redirect to the homepage
             window.location.href = "{% url 'profile' %}";
         }
+        function goToProductPost() {
+            fetch("{% url 'check_verification_status' %}")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (data.verified) {
+                    window.location.href = "/ProductPost";
+                } else {
+                    if (confirm("You have not been verified yet. Would you like to verify now?")) {
+                        window.location.href = "/send_code";
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Something went wrong. Please try again.");
+            });
+        }
+
     </script>
     <script src="/static/js/jquery-3.3.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>

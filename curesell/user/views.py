@@ -198,3 +198,12 @@ def rate_purchases(request):
 
 
         return JsonResponse({"success": "Rating submitted successfully."})
+    
+def check_verification_status(request):
+    try:
+        username = request.session.get('username')
+        userinfo = UserInfo.objects.filter(username=username).first()
+        is_verified = userinfo.email != ''
+        return JsonResponse({'verified': is_verified})
+    except UserInfo.DoesNotExist:
+        return JsonResponse({'verified': False, 'error': 'User not found'}, status=404)

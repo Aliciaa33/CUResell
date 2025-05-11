@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^release_records/$',views.release_records, name='release_records'),
     url(r'^purchase_records/$',views.purchase_records, name='purchase_records'),
     url(r'^rate-purchases/$',views.rate_purchases, name='rate_purchases'),
+    url(r'^check_verification_status$', views.check_verification_status, name='check_verification_status'),
 ]
