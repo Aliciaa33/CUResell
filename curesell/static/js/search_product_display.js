@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
             // window.location.href = `/product/${card.dataset.id}`; // 需根据实际路由修改
-            window.location.href = `/detail/?title=${card.dataset.id}`;
+            window.location.href = `/detail/?prod_id=${card.dataset.id}`;
         });
     });
 });

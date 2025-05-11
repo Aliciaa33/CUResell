@@ -53,9 +53,10 @@
         <!-- product cards -->
         <div class="product-grid">
             {% for product in products %}
-            <div class="product-card">
+            <div class="product-card" data-id="{{ product.id }}">
                 <img src="/static/{{product.picture}}" alt="{{ product.title }}" class="product-image">
-                <a href="/detail/?title={{ product.title }}" class="product-title">{{ product.title }}</a>
+                <!-- <a href="/detail/?prod_id={{ product.title }}" class="product-title">{{ product.title }}</a> -->
+                <p class="product-title">{{ product.title }}</p>
                 <p class="product-price">${{ product.price }}</p>
             </div>
             {% endfor %}

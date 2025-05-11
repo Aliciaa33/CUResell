@@ -58,10 +58,9 @@ def prod_post_handle(request):
     return redirect('/search')
 
 def detail(request):
-    title = request.GET['title']
-    product = ProductInfo.product.get_title(title)[0]
+    prod_id = request.GET['prod_id']
+    product = ProductInfo.product.get_prod(prod_id)[0]
     context = {'product': product}
-    print(product.title)
     return render(request, 'product_info.html', context)
 
 def make_transaction(request):

@@ -8,8 +8,8 @@ class ProdInfoManager(models.Manager):
         return prod
     
     # get the corrosponding product with the given title
-    def get_title(self, title):
-        return super(ProdInfoManager, self).get_queryset().filter(title=title)
+    def get_prod(self, prod_id):
+        return super(ProdInfoManager, self).get_queryset().filter(id=prod_id)
     
     # get all unsold products
     def get_unsold(self):
