@@ -29,6 +29,17 @@
             // Redirect to the homepage
             window.location.href = "{% url 'profile' %}";
         }
+
+        // check whether the user is verified before posting a product
+        const params = new URLSearchParams(window.location.search);
+        const error = params.get('error');
+        if (error === 'unverified') {
+            if (confirm("Your email is not verified. Go to verify now?")) {
+                window.location.href = "/send_code/";
+            } else {
+                window.history.back();
+            }
+        }
     </script>
     <script src="/static/js/jquery-3.3.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>

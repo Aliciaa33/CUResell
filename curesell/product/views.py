@@ -13,6 +13,12 @@ def product_info(request):
     return render(request,'product_info.html')
 
 def ProductPost(request):
+    user_id = request.session.get('user_id')
+    user = UserInfo.objects.filter(id=user_id).first()
+    # check if user has verified with an email
+    if not user.email.strip():
+        prev_url = request.META.get('HTTP_REFERER', '/search_default')
+        return redirect(f'{prev_url}?error=unverified')
     return render(request,'ProductPost.html')
 
 def search_default(request):
