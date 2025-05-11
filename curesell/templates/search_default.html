@@ -47,11 +47,11 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- product cards -->
     <div class="product-grid">
         {% for product in products %}
-        <div class="product-card" data-id="{{ product.title }}">
+        <div class="product-card" data-id="{{ product.id }}">
             <img src="/static/{{product.picture}}" alt="{{ product.title }}" class="product-image">
             <p class="product-title">{{ product.title }}</p>
             <p class="product-price">${{ product.price }}</p>
