@@ -49,7 +49,7 @@
               <li class="list-group-item"><a onclick="goToProfile()">presonal information</a></li>
               <li class="list-group-item"><a onclick="goToReleaseRecords()">release records</a></li>
               <li class="list-group-item"><a onclick="goToPurchaseRecords()">purchase records</a></li>
-              <li class="list-group-item"><a href="/send_code">verfication status</a></li>
+              <li class="list-group-item"><a href="#" id="verify-status-link">verfication status</a></li>
           </ul>
       </div>
       <div class="list_body">
@@ -90,6 +90,17 @@
     function goToPurchaseRecords() {
         window.location.href = "{% url 'purchase_records' %}";
     }
+
+    // check whether user has already verified
+    const isVerified = "{{ is_verified|yesno:'true,false' }}" === "true";
+    document.getElementById('verify-status-link').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (isVerified) {
+        alert("You have already verified.");
+      } else {
+        window.location.href = "/send_code";
+      }
+    });
   </script>
 </body>
 </html>

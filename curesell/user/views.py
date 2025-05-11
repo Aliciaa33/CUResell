@@ -132,13 +132,14 @@ def profile(request):
     username = request.session.get('username')
 
     userinfo = UserInfo.objects.filter(username=username).first()
+    is_verified = bool(userinfo and userinfo.email.strip())
 
     rate = userinfo.rate
     if username == None:
         context = { 'error_msg': 'please login first'}
         return render(request, 'profile.html', context)
     else:
-        context = {'username': username, 'rate1': rate, 'rate2': int(rate*100)}
+        context = {'username': username, 'rate1': rate, 'rate2': int(rate*100), 'is_verified': is_verified}
         return render(request, 'profile.html', context)
     
 def release_records(request):
@@ -148,23 +149,25 @@ def release_records(request):
         context = { 'error_msg': 'please login first'}
         return render(request, 'release_records.html', context)
     else:
+        is_verified = bool(userinfo and userinfo.email.strip())
         all_products = ProductInfo.product.get_all() 
         user_products=[]
         for product in all_products:
             if product.seller==userinfo:
                 user_products.append(product)
-        content={'products': user_products}
+        content={'products': user_products, 'is_verified': is_verified}
         return render(request, 'release_records.html', content)
     
 def purchase_records(request):
     username = request.session.get('username')
     userinfo = UserInfo.objects.filter(username=username).first()
+    is_verified = bool(userinfo and userinfo.email.strip())
     all_records = Transaction.objects.all()
     records=[]
     for index, record in enumerate(all_records):
         if record.buyer==userinfo:
             records.append({"prod":record.product,"rate":record.rate,"price":record.price,"date":record.date,"transaction_index":index})
-    content={'records': records}
+    content={'records': records, 'is_verified': is_verified}
     return render(request, 'purchase_records.html', content)
 
 @require_http_methods(["GET", "POST"])
