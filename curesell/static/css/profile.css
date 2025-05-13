@@ -19,7 +19,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-/* 让整个列表区域居中，并增加美观的背景 */
+
 .list {
     width: 95%; 
     max-width: 1200px;
@@ -30,7 +30,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* 导航栏样式优化 */
+
 .list_nav {
     background-color: #622b8c;
     padding: 12px;
@@ -63,7 +63,7 @@
     padding: 12px;
 }
 
-/* 个人信息展示区域优化 */
+
 .list_body {
     padding: 20px;
     margin-top: 15px;
@@ -72,7 +72,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 表格优化 */
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -95,7 +95,7 @@
     background-color: #f9f9f9;
 }
 
-/* 响应式优化，使其适应不同设备 */
+
 @media screen and (max-width: 800px) {
     .list {
         width: 95%;
