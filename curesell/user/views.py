@@ -15,6 +15,12 @@ from django.views.decorators.http import require_http_methods
 def homepage(request):
     return render(request,'homepage.html')
 
+def terms(request):
+    return render(request,'terms.html')
+
+def privacy(request):
+    return render(request,'privacy.html')
+
 def login(request):
     uname = request.COOKIES.get('uname','')
     context = {'uname' : uname}
@@ -25,7 +31,6 @@ def login_handle(request):
     username = post.get('username')
     password = post.get('password')
     users = UserInfo.objects.filter(username=username)
-    print(username)
     if len(users) == 1:
         s1 = sha1()
         s1.update(password.encode('utf8'))

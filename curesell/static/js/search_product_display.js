@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // sort
-    const sortBtn = document.querySelector('.sort-btn');
-    const sortOptions = document.querySelector('.sort-options');
-    const applyBtn = document.querySelector('.apply-btn');
-
-    // display/hide sort options
-    sortBtn.addEventListener('click', () => {
-        sortOptions.style.display = sortOptions.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // apply sort
-    applyBtn.addEventListener('click', () => {
-        const selectedSorts = Array.from(document.querySelectorAll('.sort-options input:checked'))
-                                 .map(input => input.value);
-        // 这里应调用后端API进行排序，示例使用前端排序
-        sortProducts(selectedSorts);
-        sortOptions.style.display = 'none';
-    });
-
     // 商品点击跳转
     document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
